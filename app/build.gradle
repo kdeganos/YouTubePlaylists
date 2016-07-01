@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.epicodus.humanesociety"
+        applicationId "com.epicodus.youtubeplaylists"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
