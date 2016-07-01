@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/memberNameEditText"
         android:hint="Name"
-        android:background="#dfdfdf"
+        android:background="@color/editBox"
         android:layout_above="@+id/signInButton"
         android:layout_alignLeft="@+id/welcomeTextView"
         android:layout_alignStart="@+id/welcomeTextView"

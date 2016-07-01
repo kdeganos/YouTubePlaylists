@@ -15,7 +15,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MemberActivity"></activity>
+        <activity android:name=".MemberActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.youtubeplaylists.MainActivity" />
+        </activity>
+        <activity android:name=".SearchResults">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.youtubeplaylists.MemberActivity" />
+        </activity>
     </application>
 
 </manifest>
