@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,12 +32,13 @@ public class SearchResults extends AppCompatActivity {
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, results);
         mSearchListView.setAdapter(adapter);
-//        mSearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                Toast.("petObject", petArray[position]);
-//      }
+        mSearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(SearchResults.this, results[position], Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
