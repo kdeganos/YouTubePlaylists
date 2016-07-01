@@ -1,6 +1,7 @@
 package com.epicodus.youtubeplaylists;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,10 +28,11 @@ public class SearchResults extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String searchTerms = intent.getStringExtra("searchTerms");
-        mSearchTermsTextView.setText('"' + searchTerms + '"');
+        Resources res = getResources();
+        String searchTerms = String.format(res.getString(R.string.search_terms), intent.getStringExtra("searchTerms"));
+        mSearchTermsTextView.setText(searchTerms);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, results);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, results);
         mSearchListView.setAdapter(adapter);
         mSearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

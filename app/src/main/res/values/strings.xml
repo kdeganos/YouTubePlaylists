@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">YouTube Playlists</string>
+    <string name="search_terms">\"%1$s\"</string>
 </resources>
