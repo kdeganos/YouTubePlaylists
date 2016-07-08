@@ -1,9 +1,9 @@
 # Android Playlists
 
-#### _App to allow collaborative YouTube playlists, 07/01/2016_
+#### _App to allow collaborative YouTube playlists, 07/08/2016_
 
 ## Description
-This app takes a user inputted name and displays it on a new activity as a simulated user login. It then accepts a user inputted search string and takes the user to a new activity with hardcoded, simulated search results.
+This app takes a user inputted name and displays it on a new activity as a simulated user login. It then accepts a user inputted search string and takes the user to search results displayed with a RecyclerView.
 
 
 ## Prerequisites
