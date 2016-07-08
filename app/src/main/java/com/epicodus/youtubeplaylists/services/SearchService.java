@@ -63,69 +63,71 @@ public class SearchService {
 //        https://www.googleapis.com/youtube/v3/search?part=snippet&q=cats&key=AIzaSyBlGhwpWvzeZrEzPNlNJl7WOi9O0Hs0vzc
 //        https://www.googleapis.com/youtube/v3/search?part=snippet%2Cstatistics%2CcontentDetails&fields=items(id(kind%2CvideoId)%2Csnippet(description%2CpublishedAt%2Cthumbnails%2Fdefault%2Furl%2Ctitle))&q=cats&key={YOUR_API_KEY}
 //        https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=7&q=cats&type=video&fields=items%2Fid%2FvideoId&key={YOUR_API_KEY}
+
+
+        OkHttpClient client = new OkHttpClient.Builder().build();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.BASE_SEARCH_URL).newBuilder();
+        urlBuilder.addQueryParameter(Constants.PART, "snippet");
+        urlBuilder.addQueryParameter(Constants.SEARCH_PARAMETER, queryTerm);
+        urlBuilder.addQueryParameter(Constants.API_PARAMETER, Constants.YOUTUBE_API_KEY);
+        String url = urlBuilder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+
+
+//        GoogleAccountCredential credential = GoogleAccountCredential.usingOAuth2(getApplicationContext(), Arrays.asList(Auth.SCOPES));
 //
 //
-//        OkHttpClient client = new OkHttpClient.Builder().build();
+//        try {
+//            // This object is used to make YouTube Data API requests. The last
+//            // argument is required, but since we don't need anything
+//            // initialized when the HttpRequest is initialized, we override
+//            // the interface and provide a no-op function.
 //
-//        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.BASE_SEARCH_URL).newBuilder();
-//        urlBuilder.addQueryParameter(Constants.PART, "snippet");
-//        urlBuilder.addQueryParameter(Constants.SEARCH_PARAMETER, queryTerm);
-//        urlBuilder.addQueryParameter(Constants.API_PARAMETER, Constants.YOUTUBE_API_KEY);
-//        String url = urlBuilder.build().toString();
 //
-//        Request request = new Request.Builder().url(url).build();
+//            youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
+//                public void initialize(HttpRequest request) throws IOException {
+//                }
+//            }).setApplicationName("youtube-playlists").build();
 //
-//        Call call = client.newCall(request);
-//        call.enqueue(callback);
-        GoogleAccountCredential credential = GoogleAccountCredential.usingOAuth2(getApplicationContext(), Arrays.asList(Auth.SCOPES));
-
-
-        try {
-            // This object is used to make YouTube Data API requests. The last
-            // argument is required, but since we don't need anything
-            // initialized when the HttpRequest is initialized, we override
-            // the interface and provide a no-op function.
-
-
-            youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-                public void initialize(HttpRequest request) throws IOException {
-                }
-            }).setApplicationName("youtube-playlists").build();
-
-            // Define the API request for retrieving search results.
-            YouTube.Search.List search = youtube.search().list("id,snippet");
-
-            // Set your developer key from the Google Developers Console for
-            // non-authenticated requests. See:
-            // https://console.developers.google.com/
-            String apiKey = Constants.YOUTUBE_API_KEY;
-            search.setKey(apiKey);
-            search.setQ(queryTerm);
-
-            // Restrict the search results to only include videos. See:
-            // https://developers.google.com/youtube/v3/docs/search/list#type
-            search.setType("video");
-
-            // To increase efficiency, only retrieve the fields that the
-            // application uses.
-            search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)");
-            search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
-
-            // Call the API and print results.
-            SearchListResponse searchResponse = search.execute();
-            List<SearchResult> searchResultList = searchResponse.getItems();
-            Log.d(TAG, "findVideos: " + searchResponse.getItems().getClass());
-
-            if (searchResultList != null) {
-                prettyPrint(searchResultList.iterator(), queryTerm);
-            }
-        } catch (GoogleJsonResponseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
+//            // Define the API request for retrieving search results.
+//            YouTube.Search.List search = youtube.search().list("id,snippet");
+//
+//            // Set your developer key from the Google Developers Console for
+//            // non-authenticated requests. See:
+//            // https://console.developers.google.com/
+//            String apiKey = Constants.YOUTUBE_API_KEY;
+//            search.setKey(apiKey);
+//            search.setQ(queryTerm);
+//
+//            // Restrict the search results to only include videos. See:
+//            // https://developers.google.com/youtube/v3/docs/search/list#type
+//            search.setType("video");
+//
+//            // To increase efficiency, only retrieve the fields that the
+//            // application uses.
+//            search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)");
+//            search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
+//
+//            // Call the API and print results.
+//            SearchListResponse searchResponse = search.execute();
+//            List<SearchResult> searchResultList = searchResponse.getItems();
+//            Log.d(TAG, "findVideos: " + searchResponse.getItems().getClass());
+//
+//            if (searchResultList != null) {
+//                prettyPrint(searchResultList.iterator(), queryTerm);
+//            }
+//        } catch (GoogleJsonResponseException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (Throwable t) {
+//            t.printStackTrace();
+//        }
     }
 
     public ArrayList<VideoObj> processResults(Response response) {
