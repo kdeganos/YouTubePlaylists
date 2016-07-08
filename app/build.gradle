@@ -1,10 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'MyAndroidKey'
+            keyPassword '909810'
+            storeFile file('/Users/Guest/Desktop/YouTubePlaylists/android.jks')
+            storePassword '909810'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
     useLibrary 'org.apache.http.legacy'
-
     defaultConfig {
         applicationId "com.epicodus.youtubeplaylists"
         minSdkVersion 15
@@ -18,6 +25,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        buildTypes.each {
+            it.buildConfigField 'String', 'YOUTUBE_API_KEY', apikey
+        }
     }
     repositories {
         mavenCentral()
@@ -26,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -39,4 +49,13 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.apis:google-api-services-youtube:v3-rev176-1.22.0'
+    compile 'com.google.api-client:google-api-client:1.19.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.android.support:recyclerview-v7:+'
+
+}
+
+configurations.all {
+    resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
 }

@@ -1,4 +1,4 @@
-package com.epicodus.youtubeplaylists;
+package com.epicodus.youtubeplaylists.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.epicodus.youtubeplaylists.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,7 +35,7 @@ public class MemberActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v == mSearchButton) {
             String searchTerms = mSearchTermsEditText.getText().toString();
-            Intent intent = new Intent(MemberActivity.this, SearchResults.class);
+            Intent intent = new Intent(MemberActivity.this, SearchResultsActivity.class);
             intent.putExtra("searchTerms", searchTerms);
             startActivity(intent);
         }

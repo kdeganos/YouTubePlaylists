@@ -2,6 +2,8 @@ package com.epicodus.youtubeplaylists;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.epicodus.youtubeplaylists.ui.MemberActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -21,9 +23,9 @@ public class MemberActivityInstrumentationTest {
 
     @Test
     public void memberNameIsSentToMemberActivity() {
-        String searchTerms = "New Search";
+        String searchTerms = "New SearchService";
         onView(withId(R.id.searchTermsEditText)).perform(typeText(searchTerms));
         onView(withId(R.id.searchButton)).perform(click());
-        onView(withId(R.id.searchTermsTextView)).check(matches(withText("\"New Search\"")));
+        onView(withId(R.id.searchTermsTextView)).check(matches(withText("\"New SearchService\"")));
     }
 }
