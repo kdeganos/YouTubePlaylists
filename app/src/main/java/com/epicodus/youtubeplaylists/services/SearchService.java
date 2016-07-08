@@ -27,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -143,6 +144,7 @@ public class SearchService {
                     JSONObject videoJSON = itemsJSON.getJSONObject(i);
                     JSONObject snippetJSON = videoJSON.getJSONObject("snippet");
                     String videoId = videoJSON.getJSONObject("id").getString("videoId");
+                    //2016-07-08T13:41:40.000Z
                     String publishedAt = snippetJSON.getString("publishedAt");
                     String title = snippetJSON.getString("title");
                     String description = snippetJSON.getString("description");
