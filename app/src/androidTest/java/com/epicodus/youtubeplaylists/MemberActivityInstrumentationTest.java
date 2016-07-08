@@ -26,6 +26,6 @@ public class MemberActivityInstrumentationTest {
         String searchTerms = "New SearchService";
         onView(withId(R.id.searchTermsEditText)).perform(typeText(searchTerms));
         onView(withId(R.id.searchButton)).perform(click());
-        onView(withId(R.id.searchTermsTextView)).check(matches(withText("\"New SearchService\"")));
+        onView(withId(R.id.toolbar_title)).check(matches(withText("New SearchService")));
     }
 }
